@@ -1,0 +1,174 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "sim",
+    "homeTeam",
+    "teams"
+  ],
+  "properties": {
+    "sim": {
+      "$id": "#/properties/sim",
+      "type": "object",
+      "title": "The Sim Schema",
+      "required": [
+        "iterations"
+      ],
+      "properties": {
+        "iterations": {
+          "$id": "#/properties/sim/properties/iterations",
+          "type": "integer",
+		  "minimum": 1,
+		  "exclusiveMaximum": 1000000
+          "title": "The Iterations Schema",
+          "default": 20000,
+          "examples": [
+            50000
+          ]
+        }
+      }
+    },
+    "homeTeam": {
+      "$id": "#/properties/homeTeam",
+      "type": "string",
+      "title": "The Hometeam Schema",
+      "default": "",
+      "examples": [
+        "GSW"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "teams": {
+      "$id": "#/properties/teams",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "title": "The Teams Schema",
+      "items": {
+        "$id": "#/properties/teams/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "required": [
+          "name",
+          "pos",
+          "twoPt",
+          "threePt",
+          "to"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/teams/items/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "default": "",
+            "examples": [
+              "LAL"
+            ],
+            "pattern": "^(.*)$"
+          },
+          "pos": {
+            "$id": "#/properties/teams/items/properties/pos",
+            "type": "number",
+            "title": "The Pos Schema",
+            "default": 0,
+			"minimum": 1,
+			"exclusiveMaximum": 500
+            "examples": [
+              101.1
+            ]
+          },
+          "twoPt": {
+            "$id": "#/properties/teams/items/properties/twoPt",
+            "type": "object",
+            "title": "The Twopt Schema",
+            "required": [
+              "att",
+              "pct"
+            ],
+            "properties": {
+              "att": {
+                "$id": "#/properties/teams/items/properties/twoPt/properties/att",
+                "type": "number",
+                "title": "The Att Schema",
+                "default": 0,
+				"minimum": 1,
+				"exclusiveMaximum": 500
+                "examples": [
+                  44.2
+                ]
+              },
+              "pct": {
+                "$id": "#/properties/teams/items/properties/twoPt/properties/pct",
+                "type": "number",
+                "title": "The Pct Schema",
+                "default": 50,
+				"minimum": 1,
+				"exclusiveMaximum": 100
+                "examples": [
+                  54.3
+                ]
+              }
+            }
+          },
+          "threePt": {
+            "$id": "#/properties/teams/items/properties/threePt",
+            "type": "object",
+            "title": "The Threept Schema",
+            "required": [
+              "att",
+              "pct"
+            ],
+            "properties": {
+              "att": {
+                "$id": "#/properties/teams/items/properties/threePt/properties/att",
+                "type": "number",
+                "title": "The Att Schema",
+                "default": 0,
+				"minimum": 1,
+				"exclusiveMaximum": 500
+                "examples": [
+                  26.2
+                ]
+              },
+              "pct": {
+                "$id": "#/properties/teams/items/properties/threePt/properties/pct",
+                "type": "number",
+                "title": "The Pct Schema",
+                "default": 0,
+				"minimum": 1,
+				"exclusiveMaximum": 100
+                "examples": [
+                  42.3
+                ]
+              }
+            }
+          },
+          "to": {
+            "$id": "#/properties/teams/items/properties/to",
+            "type": "object",
+            "title": "The To Schema",
+            "required": [
+              "pct"
+            ],
+            "properties": {
+              "pct": {
+                "$id": "#/properties/teams/items/properties/to/properties/pct",
+                "type": "integer",
+                "title": "The Pct Schema",
+                "default": 0,
+				"minimum": 1,
+				"exclusiveMaximum": 100
+                "examples": [
+                  16
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
