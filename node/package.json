@@ -32,7 +32,8 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
-    "jsonschema": "^1.2.4"
+    "jsonschema": "^1.2.4",
+    "lodash": "^4.17.15"
   },
   "author": "Teqniqly",
   "license": "MIT"

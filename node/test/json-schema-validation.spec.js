@@ -45,9 +45,8 @@ describe('validation errors', () => {
       const names = ['A', 'AA', 'AAAA'];
 
       names.forEach(n => {
-        const copy2 = helpers.makeInstanceCopy();
-        copy2.homeTeam = 'AAAA';
-        helpers.assertNotValid(validator, copy2);
+        copy.homeTeam = n;
+        helpers.assertNotValid(validator, copy);
       });
     });
   });
@@ -66,9 +65,8 @@ describe('validation errors', () => {
     it('iterations out of range', () => {
       const iterations = [-1, 0, 1000000 + 1];
       iterations.forEach(i => {
-        const copy2 = helpers.makeInstanceCopy();
-        copy2.sim.iterations = i;
-        helpers.assertNotValid(validator, copy2);
+        copy.sim.iterations = i;
+        helpers.assertNotValid(validator, copy);
       });
     });
   });

@@ -1,5 +1,6 @@
 const chai = require('chai');
 const { expect } = chai;
+const _ = require('lodash');
 const schema = require('../data/bbsim-schema.json');
 const instance = require('../data/bbsim.json');
 
@@ -20,7 +21,7 @@ const assertNotValid = (validator, instance) => {
 };
 
 const makeInstanceCopy = () => {
-  return Object.assign({}, instance);
+  return _.cloneDeep(instance);
 };
 
 module.exports = {
