@@ -1,0 +1,34 @@
+{
+  "sim": {
+    "iterations": 10000
+  },
+  "homeTeam": "LAL",
+  "teams": [
+    {
+      "name": "GSW",
+      "pace": 100,
+      "twoPt": {
+        "att": 58,
+        "pct": 0.57
+      },
+      "threePt": {
+        "att": 19,
+        "pct": 0.401
+      },
+      "to": 19
+    },
+    {
+      "name": "LAL",
+      "pace": 102.3,
+      "twoPt": {
+        "att": 66,
+        "pct": 0.61
+      },
+      "threePt": {
+        "att": 21,
+        "pct": 0.399
+      },
+      "to": 15
+    }
+  ]
+}

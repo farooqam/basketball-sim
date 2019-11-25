@@ -21,12 +21,11 @@
         "iterations": {
           "$id": "#/properties/sim/properties/iterations",
           "type": "integer",
-		  "minimum": 1,
-		  "exclusiveMaximum": 1000000
+          "minimum": 1,
+          "maximum": 1000000,
           "title": "The Iterations Schema",
-          "default": 20000,
           "examples": [
-            50000
+            10000
           ]
         }
       }
@@ -35,11 +34,10 @@
       "$id": "#/properties/homeTeam",
       "type": "string",
       "title": "The Hometeam Schema",
-      "default": "",
       "examples": [
         "GSW"
       ],
-      "pattern": "^(.*)$"
+      "pattern": "^[A-Z]{3}$"
     },
     "teams": {
       "$id": "#/properties/teams",
@@ -53,7 +51,7 @@
         "title": "The Items Schema",
         "required": [
           "name",
-          "pos",
+          "pace",
           "twoPt",
           "threePt",
           "to"
@@ -63,21 +61,19 @@
             "$id": "#/properties/teams/items/properties/name",
             "type": "string",
             "title": "The Name Schema",
-            "default": "",
             "examples": [
               "LAL"
             ],
-            "pattern": "^(.*)$"
+            "pattern": "^[A-Z]{3}$"
           },
-          "pos": {
-            "$id": "#/properties/teams/items/properties/pos",
+          "pace": {
+            "$id": "#/properties/teams/items/properties/pace",
             "type": "number",
-            "title": "The Pos Schema",
-            "default": 0,
-			"minimum": 1,
-			"exclusiveMaximum": 500
+            "title": "The Pace Schema",
+            "minimum": 90,
+            "exclusiveMaximum": 200,
             "examples": [
-              101.1
+              102.5
             ]
           },
           "twoPt": {
@@ -93,20 +89,18 @@
                 "$id": "#/properties/teams/items/properties/twoPt/properties/att",
                 "type": "number",
                 "title": "The Att Schema",
-                "default": 0,
-				"minimum": 1,
-				"exclusiveMaximum": 500
+                "minimum": 10,
+                "exclusiveMaximum": 100,
                 "examples": [
-                  44.2
+                  54
                 ]
               },
               "pct": {
                 "$id": "#/properties/teams/items/properties/twoPt/properties/pct",
                 "type": "number",
                 "title": "The Pct Schema",
-                "default": 50,
-				"minimum": 1,
-				"exclusiveMaximum": 100
+                "minimum": 0.2,
+                "exclusiveMaximum": 1,
                 "examples": [
                   54.3
                 ]
@@ -126,46 +120,33 @@
                 "$id": "#/properties/teams/items/properties/threePt/properties/att",
                 "type": "number",
                 "title": "The Att Schema",
-                "default": 0,
-				"minimum": 1,
-				"exclusiveMaximum": 500
+                "minimum": 0,
+                "exclusiveMaximum": 70,
                 "examples": [
-                  26.2
+                  33
                 ]
               },
               "pct": {
                 "$id": "#/properties/teams/items/properties/threePt/properties/pct",
                 "type": "number",
                 "title": "The Pct Schema",
-                "default": 0,
-				"minimum": 1,
-				"exclusiveMaximum": 100
+                "minimum": 0,
+                "exclusiveMaximum": 1,
                 "examples": [
-                  42.3
+                  0.355
                 ]
               }
             }
           },
           "to": {
             "$id": "#/properties/teams/items/properties/to",
-            "type": "object",
+            "type": "number",
             "title": "The To Schema",
-            "required": [
-              "pct"
-            ],
-            "properties": {
-              "pct": {
-                "$id": "#/properties/teams/items/properties/to/properties/pct",
-                "type": "integer",
-                "title": "The Pct Schema",
-                "default": 0,
-				"minimum": 1,
-				"exclusiveMaximum": 100
-                "examples": [
-                  16
-                ]
-              }
-            }
+            "minimum": 0,
+            "exclusiveMaximum": 50,
+            "examples": [
+              15
+            ]
           }
         }
       }
