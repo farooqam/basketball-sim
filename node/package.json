@@ -6,7 +6,8 @@
     "bbsim": "./bin/app.js"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --watch"
+    "test": "node_modules/.bin/mocha --watch",
+    "lint": "eslint . --fix"
   },
   "homepage": "https://github.com/farooqam/basketball-sim#readme",
   "repository": {

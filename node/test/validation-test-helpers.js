@@ -10,7 +10,7 @@ const validate$ = (validator, instance) => {
 
 const isValid$ = (validator, instance) => {
   return validate$(validator, instance).valid;
-}
+};
 
 const assertIsValid = (validator, instance) => {
   expect(isValid$(validator, instance)).to.eq(true);

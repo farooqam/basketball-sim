@@ -128,7 +128,7 @@ describe('validation errors', () => {
     });
 
     it('pace missing', () => {
-      delete copy.teams[0].pace; 
+      delete copy.teams[0].pace;
       helpers.assertNotValid(validator, copy);
     });
 

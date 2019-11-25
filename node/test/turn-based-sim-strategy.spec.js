@@ -20,7 +20,7 @@ describe('TurnBasedSimStrategy', () => {
       });
     });
 
-    it('invalid when ')
+    it('invalid when ');
 
     it('invalid when both teams not specified', () => {
       const configs = [
