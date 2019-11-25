@@ -71,7 +71,7 @@
             "type": "number",
             "title": "The Pace Schema",
             "minimum": 90,
-            "exclusiveMaximum": 200,
+            "maximum": 200,
             "examples": [
               102.5
             ]
@@ -90,7 +90,7 @@
                 "type": "number",
                 "title": "The Att Schema",
                 "minimum": 10,
-                "exclusiveMaximum": 100,
+                "maximum": 100,
                 "examples": [
                   54
                 ]
@@ -100,7 +100,7 @@
                 "type": "number",
                 "title": "The Pct Schema",
                 "minimum": 0.2,
-                "exclusiveMaximum": 1,
+                "maximum": 1,
                 "examples": [
                   54.3
                 ]
@@ -121,7 +121,7 @@
                 "type": "number",
                 "title": "The Att Schema",
                 "minimum": 0,
-                "exclusiveMaximum": 70,
+                "maximum": 70,
                 "examples": [
                   33
                 ]
@@ -131,7 +131,7 @@
                 "type": "number",
                 "title": "The Pct Schema",
                 "minimum": 0,
-                "exclusiveMaximum": 1,
+                "maximum": 1,
                 "examples": [
                   0.355
                 ]
@@ -143,7 +143,7 @@
             "type": "number",
             "title": "The To Schema",
             "minimum": 0,
-            "exclusiveMaximum": 50,
+            "maximum": 50,
             "examples": [
               15
             ]
