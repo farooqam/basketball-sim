@@ -2,7 +2,7 @@ const chai = require('chai');
 const { expect } = chai;
 const _ = require('lodash');
 const schema = require('../data/turn-based-sim-schema.json');
-const instance = require('../data/bbsim.json');
+const instance = require('../data/turn-based-sim.json');
 
 const validate$ = (validator, instance) => {
   return validator.validate(instance, schema);
