@@ -1,50 +1,44 @@
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
 describe('twoPt object', () => {
   let validator;
-  let simData;
-  let team;
+  let twoPt;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-    team = simData.teams[0];
+    twoPt = SimDataService.getSimData().teams[0].twoPt;
   });
 
-  it('missing', () => {
-    delete team.twoPt;
-    helpers.assertNotValid(validator, simData);
-  });
 
   it('pct missing', () => {
-    delete team.twoPt.pct;
-    helpers.assertNotValid(validator, simData);
+    delete twoPt.pct;
+    helpers.assertNotValid(validator, twoPt);
   });
 
   it('pct out of range', () => {
     const percentages = [0.19, 1.01];
 
     percentages.forEach(p => {
-      team.twoPt.pct = p;
-      helpers.assertNotValid(validator, simData);
+      twoPt.pct = p;
+      helpers.assertNotValid(validator, twoPt);
     });
   });
 
   it('att missing', () => {
-    delete team.twoPt.att;
-    helpers.assertNotValid(validator, simData);
+    delete twoPt.att;
+    helpers.assertNotValid(validator, twoPt);
   });
 
   it('att out of range', () => {
     const attempts = [9, 101];
 
     attempts.forEach(a => {
-      team.twoPt.att = a;
-      helpers.assertNotValid(validator, simData);
+      twoPt.att = a;
+      helpers.assertNotValid(validator, twoPt);
     });
   });
 });

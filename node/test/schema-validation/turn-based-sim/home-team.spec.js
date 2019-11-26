@@ -1,44 +1,39 @@
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
 describe('homeTeam object', () => {
   let validator;
-  let simData;
+  let homeTeam;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-  });
-
-  it('missing', () => {
-    delete simData.homeTeam;
-    helpers.assertNotValid(validator, simData);
+    homeTeam = SimDataService.getSimData().homeTeam;
   });
 
   it('not specified', () => {
-    simData.homeTeam = '';
-    helpers.assertNotValid(validator, simData);
+    homeTeam = '';
+    helpers.assertNotValid(validator, homeTeam);
   });
 
   it('not correct length', () => {
     const names = ['A', 'AA', 'AAAA'];
 
     names.forEach(n => {
-      simData.homeTeam = n;
-      helpers.assertNotValid(validator, simData);
+      homeTeam = n;
+      helpers.assertNotValid(validator, homeTeam);
     });
   });
 
   it('not all upper case', () => {
-    simData.homeTeam = 'aaA';
-    helpers.assertNotValid(validator, simData);
+    homeTeam = 'aaA';
+    helpers.assertNotValid(validator, homeTeam);
   });
 
   it('not all letters', () => {
-    simData.homeTeam = 'AA1';
-    helpers.assertNotValid(validator, simData);
+    homeTeam = 'AA1';
+    helpers.assertNotValid(validator, homeTeam);
   });
 });

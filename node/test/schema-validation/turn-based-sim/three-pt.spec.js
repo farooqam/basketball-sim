@@ -1,50 +1,43 @@
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
 describe('threePt object', () => {
   let validator;
-  let simData;
-  let team;
+  let threePt;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-    team = simData.teams[0];
-  });
-
-  it('missing', () => {
-    delete team.threePt;
-    helpers.assertNotValid(validator, simData);
+    threePt = SimDataService.getSimData().teams[0].threePt;
   });
 
   it('pct missing', () => {
-    delete team.threePt.pct;
-    helpers.assertNotValid(validator, simData);
+    delete threePt.pct;
+    helpers.assertNotValid(validator, threePt);
   });
 
   it('pct out of range', () => {
     const percentages = [-0.01, 1.01];
 
     percentages.forEach(p => {
-      team.threePt.pct = p;
-      helpers.assertNotValid(validator, simData);
+      threePt.pct = p;
+      helpers.assertNotValid(validator, threePt);
     });
   });
 
   it('att missing', () => {
-    delete team.threePt.att;
-    helpers.assertNotValid(validator, simData);
+    delete threePt.att;
+    helpers.assertNotValid(validator, threePt);
   });
 
   it('att out of range', () => {
     const attempts = [-1, 71];
 
     attempts.forEach(a => {
-      team.threePt.att = a;
-      helpers.assertNotValid(validator, simData);
+      threePt.att = a;
+      helpers.assertNotValid(validator, threePt);
     });
   });
 });

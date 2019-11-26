@@ -1,33 +1,28 @@
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
 describe('sim object', () => {
   let validator;
-  let simData;
+  let sim;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-  });
-
-  it('missing', () => {
-    delete simData.sim;
-    helpers.assertNotValid(validator, simData);
+    sim = SimDataService.getSimData().sim;
   });
 
   it('iterations missing', () => {
-    delete simData.sim.iterations;
-    helpers.assertNotValid(validator, simData);
+    delete sim.iterations;
+    helpers.assertNotValid(validator, sim);
   });
 
   it('iterations out of range', () => {
     const iterations = [-1, 0, 1000000 + 1];
     iterations.forEach(i => {
-      simData.sim.iterations = i;
-      helpers.assertNotValid(validator, simData);
+      sim.iterations = i;
+      helpers.assertNotValid(validator, sim);
     });
   });
 });

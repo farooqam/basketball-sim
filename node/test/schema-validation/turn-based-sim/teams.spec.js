@@ -1,31 +1,26 @@
 const _ = require('lodash');
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
 describe('teams object', () => {
   let validator;
-  let simData;
+  let teams;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-  });
-
-  it('missing', () => {
-    delete simData.teams;
-    helpers.assertNotValid(validator, simData);
+    teams = SimDataService.getSimData().teams;
   });
 
   it('contains one team', () => {
-    simData.teams[0] = {};
-    helpers.assertNotValid(validator, simData);
+    teams[0] = {};
+    helpers.assertNotValid(validator, teams);
   });
 
   it('contains more than two teams', () => {
-    simData.teams.push(_.cloneDeep(simData.teams[0]));
-    helpers.assertNotValid(validator, simData);
+    teams.push(_.cloneDeep(teams[0]));
+    helpers.assertNotValid(validator, teams);
   });
 });

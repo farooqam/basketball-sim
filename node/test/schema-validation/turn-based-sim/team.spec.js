@@ -1,28 +1,26 @@
-const { Validator } = require('jsonschema');
+const SimDataService = require('../../util/sim-data-service');
 const helpers = require('../../validation-test-helpers');
 
-describe('sim object', () => {
+describe('team object', () => {
   let validator;
-  let simData;
   let team;
 
   before(() => {
-    validator = new Validator();
+    validator = SimDataService.getValidator();
   });
 
   beforeEach(() => {
-    simData = helpers.makeInstanceCopy();
-    team = simData.teams[0];
+    team = SimDataService.getSimData().teams[0];
   });
 
   it('name missing', () => {
-    delete simData.teams[0].name;
-    helpers.assertNotValid(validator, simData);
+    delete team.name;
+    helpers.assertNotValid(validator, team);
   });
 
   it('name not specified', () => {
     team.name = '';
-    helpers.assertNotValid(validator, simData);
+    helpers.assertNotValid(validator, team);
   });
 
   it('name not correct length', () => {
@@ -30,23 +28,23 @@ describe('sim object', () => {
 
     names.forEach(n => {
       team.name = n;
-      helpers.assertNotValid(validator, simData);
+      helpers.assertNotValid(validator, team);
     });
   });
 
   it('name not all upper case', () => {
     team.name = 'aaA';
-    helpers.assertNotValid(validator, simData);
+    helpers.assertNotValid(validator, team);
   });
 
   it('name not all letters', () => {
     team.name = 'AA1';
-    helpers.assertNotValid(validator, simData);
+    helpers.assertNotValid(validator, team);
   });
 
   it('pace missing', () => {
     delete team.pace;
-    helpers.assertNotValid(validator, simData);
+    helpers.assertNotValid(validator, team);
   });
 
   it('pace out of range', () => {
@@ -54,7 +52,7 @@ describe('sim object', () => {
 
     paces.forEach(p => {
       team.pace = p;
-      helpers.assertNotValid(validator, simData);
+      helpers.assertNotValid(validator, team);
     });
   });
 });
