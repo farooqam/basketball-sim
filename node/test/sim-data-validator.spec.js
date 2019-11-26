@@ -1,25 +1,28 @@
 const chai = require('chai');
 const { expect } = chai;
+const SimDataValidator = require('../lib/sim-data-validator');
 
-const ValidatorService = require('../lib/validator-service');
-const schema = require('../data/bbsim-schema.json');
-const validInstance = require('../data/bbsim.json');
+class FakeValidator extends SimDataValidator {
+  constructor () {
+    super({ type: 'number' });
+  }
+}
 
-describe('validator service', () => {
-  let service;
+describe('validator', () => {
+  let validator;
 
   beforeEach(() => {
-    service = new ValidatorService(schema);
+    validator = new FakeValidator();
   });
 
   it('returns errors when not valid', () => {
-    const result = service.validate({});
+    const result = validator.validate('foo');
     expect(result.isValid).to.eq(false);
     expect(result.errors.length).to.be.above(0);
   });
 
   it('returns no errors when valid', () => {
-    const result = service.validate(validInstance);
+    const result = validator.validate(3);
     expect(result.isValid).to.eq(true);
     expect(result.errors.length).to.eq(0);
   });

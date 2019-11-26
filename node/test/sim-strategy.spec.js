@@ -1,20 +1,18 @@
 const chai = require('chai');
 const { expect } = chai;
-const sinon = require('sinon');
 
-const TurnBasedSimStrategy = require('../lib/turn-based-sim-strategy');
-const ValidatorService = require('../lib/validator-service');
+const SimStrategy = require('../lib/sim-strategy');
+
+class FakeSimStrategy extends SimStrategy {
+  onExecute (simData) {
+  }
+}
 
 describe('execute', () => {
   let strategy;
-  let validatorServiceStub;
-
-  afterEach(() => {
-    sinon.restore();
-  });
 
   it('throws error when sim data invalid', () => {
-    const mock = {
+    const mockValidator = {
       validate: () => {
         return {
           isValid: false,
@@ -23,7 +21,7 @@ describe('execute', () => {
       }
     };
 
-    strategy = new TurnBasedSimStrategy(mock);
+    strategy = new FakeSimStrategy(mockValidator);
 
     try {
       strategy.execute({});
@@ -34,7 +32,7 @@ describe('execute', () => {
   });
 
   it('raised validated event when sim data valid', () => {
-    const mock = {
+    const mockValidator = {
       validate: () => {
         return {
           isValid: true
@@ -42,7 +40,7 @@ describe('execute', () => {
       }
     };
 
-    strategy = new TurnBasedSimStrategy(mock);
+    strategy = new FakeSimStrategy(mockValidator);
 
     let eventRaised = false;
     strategy.events.on('validated', () => {

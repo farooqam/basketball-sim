@@ -1,20 +1,7 @@
-const EventEmitter = require('events');
-const ValidationError = require('../lib/validation-error');
+const SimStrategy = require('./sim-strategy');
 
-class TurnBasedSimStrategy {
-  constructor (validatorService) {
-    this.validatorService = validatorService;
-    this.events = new EventEmitter();
-  }
-
-  execute (simData) {
-    const validationResult = this.validatorService.validate(simData);
-
-    if (!validationResult.isValid) {
-      throw new ValidationError('Sim data failed validation', validationResult.errors);
-    }
-
-    this.events.emit('validated');
+class TurnBasedSimStrategy extends SimStrategy {
+  onExecute (simData) {
   }
 }
 
