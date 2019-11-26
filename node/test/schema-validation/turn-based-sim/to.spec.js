@@ -16,8 +16,8 @@ describe('to object', () => {
   it('out of range', () => {
     const turnovers = [-1, 51];
 
-    turnovers.forEach(to => {
-      to = to;
+    turnovers.forEach(turnover => {
+      to = turnover;
       helpers.assertNotValid(validator, to);
     });
   });
