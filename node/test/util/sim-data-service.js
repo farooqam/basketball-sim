@@ -1,5 +1,5 @@
 const { Validator } = require('jsonschema');
-const helpers = require('../validation-test-helpers');
+const helpers = require('./validation-test-helpers');
 
 class SimDataService {
   static getSimData () {

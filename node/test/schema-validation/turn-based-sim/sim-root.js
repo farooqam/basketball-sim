@@ -1,5 +1,5 @@
 const SimDataService = require('../../util/sim-data-service');
-const helpers = require('../../validation-test-helpers');
+const helpers = require('../../util/validation-test-helpers');
 
 describe('root sim data objects', () => {
   let validator;

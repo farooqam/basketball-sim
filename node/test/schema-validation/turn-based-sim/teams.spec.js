@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const SimDataService = require('../../util/sim-data-service');
-const helpers = require('../../validation-test-helpers');
+const helpers = require('../../util/validation-test-helpers');
 
 describe('teams object', () => {
   let validator;
