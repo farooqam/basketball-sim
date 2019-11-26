@@ -55,4 +55,19 @@ describe('team object', () => {
       helpers.assertNotValid(validator, team);
     });
   });
+
+  it('twoPt object required', () => {
+    delete team.twoPt;
+    helpers.assertNotValid(validator, team);
+  });
+
+  it('threePt object required', () => {
+    delete team.threePt;
+    helpers.assertNotValid(validator, team);
+  });
+
+  it('to object required', () => {
+    delete team.to;
+    helpers.assertNotValid(validator, team);
+  });
 });
