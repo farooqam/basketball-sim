@@ -1,45 +1,55 @@
 const chai = require('chai');
 const { expect } = chai;
+const sinon = require('sinon');
 
 const TurnBasedSimStrategy = require('../lib/turn-based-sim-strategy');
+const ValidatorService = require('../lib/validator-service');
 
-describe('TurnBasedSimStrategy', () => {
-  describe('validate()', () => {
-    it('invalid when config isn\'t specified', () => {
-      const configs = [null, undefined];
+describe('execute', () => {
+  let strategy;
+  let validatorServiceStub;
 
-      configs.forEach(config => {
-        const strategy = new TurnBasedSimStrategy(config);
+  afterEach(() => {
+    sinon.restore();
+  });
 
-        strategy.events.on('validated', (result, msg) => {
-          expect(result).to.eq(false);
-          expect(msg).to.eq('No configuration obect specified.');
-        });
+  it('throws error when sim data invalid', () => {
+    const mock = {
+      validate: () => {
+        return {
+          isValid: false,
+          errors: ['Error 1', 'Error 2', 'Error 3']
+        };
+      }
+    };
 
-        strategy.validateConfig();
-      });
+    strategy = new TurnBasedSimStrategy(mock);
+
+    try {
+      strategy.execute({});
+    } catch (validationError) {
+      expect(validationError.message).to.eq('Sim data failed validation');
+      expect(validationError.errors).to.deep.eq(['Error 1', 'Error 2', 'Error 3']);
+    }
+  });
+
+  it('raised validated event when sim data valid', () => {
+    const mock = {
+      validate: () => {
+        return {
+          isValid: true
+        };
+      }
+    };
+
+    strategy = new TurnBasedSimStrategy(mock);
+
+    let eventRaised = false;
+    strategy.events.on('validated', () => {
+      eventRaised = true;
     });
 
-    it('invalid when ');
-
-    it('invalid when both teams not specified', () => {
-      const configs = [
-        {},
-        { teams: [] },
-        { teams: [{ team1: {} }] },
-        { teams: [{ team1: {} }, { team2: {} }, { team3: {} }] }
-      ];
-
-      configs.forEach(config => {
-        const strategy = new TurnBasedSimStrategy(config);
-
-        strategy.events.on('validated', (result, msg) => {
-          expect(result).to.eq(false);
-          expect(msg).to.eq('Configuration should contain only two teams.');
-        });
-
-        strategy.validateConfig();
-      });
-    });
+    strategy.execute({});
+    expect(eventRaised).to.eq(true);
   });
 });

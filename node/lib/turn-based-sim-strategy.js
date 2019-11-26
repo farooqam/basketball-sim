@@ -1,29 +1,20 @@
-const { EventEmitter } = require('events');
+const EventEmitter = require('events');
+const ValidationError = require('../lib/validation-error');
 
 class TurnBasedSimStrategy {
-  constructor (config) {
-    this.config = config;
+  constructor (validatorService) {
+    this.validatorService = validatorService;
     this.events = new EventEmitter();
   }
 
-  validateConfig () {
-    if (!this.config) {
-      this.events.emit('validated', false, 'No configuration obect specified.');
-      return;
+  execute (simData) {
+    const validationResult = this.validatorService.validate(simData);
+
+    if (!validationResult.isValid) {
+      throw new ValidationError('Sim data failed validation', validationResult.errors);
     }
 
-    const teams = this.config.teams;
-
-    if (!teams || teams.length !== 2) {
-      this.events.emit('validated', false, 'Configuration should contain only two teams.');
-      return;
-    }
-
-    this.events.emit('validated', true);
-  }
-
-  execute () {
-
+    this.events.emit('validated');
   }
 }
 
